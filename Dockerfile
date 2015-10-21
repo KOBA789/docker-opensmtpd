@@ -1,8 +1,9 @@
-FROM nfnty/arch-mini
+FROM alpine:edge
 
-RUN pacman -Syu --noconfirm && \
-	pacman -S --noconfirm opensmtpd && \
-	rm -rf /var/cache/pacman/pkg
+RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
+	apk update && \
+	apk add opensmtpd@testing
 
-EXPOSE 25 527
-ENTRYPOINT ["/usr/bin/smtpd", "-d"]
+VOLUME /etc/smtpd /var/spool/mail
+EXPOSE 25 587
+ENTRYPOINT ["/usr/sbin/smtpd", "-d"]
