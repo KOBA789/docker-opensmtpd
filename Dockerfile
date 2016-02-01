@@ -1,8 +1,7 @@
-FROM alpine:edge
+FROM alpine:latest
 
-RUN echo '@testing http://dl-4.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories && \
-	apk update && \
-	apk add opensmtpd@testing
+RUN apk update && \
+	apk add opensmtpd
 
 VOLUME /etc/smtpd /var/spool/mail
 EXPOSE 25 587
