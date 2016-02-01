@@ -1,7 +1,8 @@
 FROM alpine:latest
 
 RUN apk update && \
-	apk add opensmtpd
+	apk add opensmtpd && \
+	rm -rf /var/cache/apk/*
 
 VOLUME /etc/smtpd /var/spool/mail
 EXPOSE 25 587
