@@ -11,12 +11,15 @@ docker pull qjcg/opensmtpd
 # Use
 
 ```sh
+# create data volume container to share between opensmtpd & dovecot containers
+docker volume create --name maildirs
+
 docker run -d \
     --restart always \
     --name opensmtpd \
     -p 25:25 \
     -p 587:587 \
     -v /srv/opensmtpd/smtpd:/etc/smtpd:ro \
-    -v /srv/opensmtpd/mail:/var/spool/mail \
+    -v maildirs:/var/vmail \
     qjcg/opensmtpd
 ```
