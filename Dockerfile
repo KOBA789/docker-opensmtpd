@@ -1,7 +1,6 @@
 FROM alpine:3.4
 
-RUN apk add --update opensmtpd ca-certificates && \
-	rm -rf /var/cache/apk/* && \
+RUN apk add --no-cache opensmtpd ca-certificates && \
 
 	# set up virtual mail system user
 	addgroup -S vmail && \
